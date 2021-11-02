@@ -8,7 +8,12 @@ if __name__ == "__main__":
     items = [
              Item(name="+5 Dexterity Vest", sell_in=10, quality=20),
              Item(name="Aged Brie", sell_in=2, quality=0),
-             Item(name="Elixir of the Mongoose", sell_in=5, quality=7),
+             Item(name="Aged Brie", sell_in=0, quality=0),
+             Item(name="Aged Brie", sell_in=-10, quality=0),
+             Item(name="Aged Brie", sell_in=2, quality=50),
+             Item(name="Aged Brie", sell_in=2, quality=52),
+             Item(name="Aged Brie", sell_in=2, quality=-5),
+             Item(name="Elixir of the Mongoose", sell_in=1, quality=1),
              Item(name="Sulfuras, Hand of Ragnaros", sell_in=0, quality=80),
              Item(name="Sulfuras, Hand of Ragnaros", sell_in=-1, quality=80),
              Item(name="Backstage passes to a TAFKAL80ETC concert", sell_in=15, quality=20),
