@@ -79,18 +79,18 @@ class GildedRoseUpdatedTest(unittest.TestCase):
         self.assertEqual(0, items[0].quality)
 
     # Sulfuras
-    def test_sulfuras_on_sell_date(self):
-        items = [LegendaryItem("Sulfuras, Hand of Ragnaros", 0, 80)]
-        item = GildedRose(items)
-        item.update_quality()
-        self.assertEqual(0, items[0].sell_in)
-        self.assertEqual(80, items[0].quality)
-
     def test_sulfuras_before_sell_date(self):
         items = [LegendaryItem("Sulfuras, Hand of Ragnaros", 10, 80)]
         item = GildedRose(items)
         item.update_quality()
         self.assertEqual(10, items[0].sell_in)
+        self.assertEqual(80, items[0].quality)
+
+    def test_sulfuras_on_sell_date(self):
+        items = [LegendaryItem("Sulfuras, Hand of Ragnaros", 0, 80)]
+        item = GildedRose(items)
+        item.update_quality()
+        self.assertEqual(0, items[0].sell_in)
         self.assertEqual(80, items[0].quality)
 
     def test_sulfuras_after_sell_date(self):
@@ -149,7 +149,7 @@ class GildedRoseUpdatedTest(unittest.TestCase):
         item.update_quality()
         self.assertEqual(0, items[0].quality)
 
-    def test_backstage_quality_change_50(self):
+    def test_backstage_quality_over_max_quality(self):
         items = [BackstagePasses("BackStage Passes to a TAFKAL80ETC concert", 10, 50)]
         item = GildedRose(items)
         item.update_quality()
@@ -184,6 +184,7 @@ class GildedRoseUpdatedTest(unittest.TestCase):
 
         item_elixir = GildedRose(elixir_item)
         item_elixir.update_quality()
+
         self.assertEqual(19, dexterity_item[0].quality)
         self.assertEqual(6, elixir_item[0].quality)
 
