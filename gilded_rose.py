@@ -30,7 +30,7 @@ class NormalItem(Item):
 
     def update_item(self):
         self._update_sell_in()
-        self._update_quality()
+        self.quality = self._update_quality()
 
     def _update_quality(self):
         if self.sell_in >= 0:
@@ -50,7 +50,7 @@ class AgedItem(NormalItem):
         if self.quality < 0:
             return MIN_QUALITY
 
-        if sell_in >= 0 and self.quality > 0:
+        if self.sell_in >= 0 and self.quality > 0:
             return min(self.quality + 1, MAX_QUALITY)
         else:
             return min(self.quality + 2, MAX_QUALITY)
@@ -75,11 +75,11 @@ class TicketItem(NormalItem):
         NormalItem.__init__(self, name, sell_in, quality)
 
     def _update_quality(self):
-        if sell_in > 10:
+        if self.sell_in > 10:
             return min(self.quality + 1, MAX_QUALITY)
-        elif sell_in > 5:
+        elif self.sell_in > 5:
             return min(self.quality + 2, MAX_QUALITY)
-        elif sell_in >= 0:
+        elif self.sell_in >= 0:
             return min(self.quality + 3, MAX_QUALITY)
         else:
             return MIN_QUALITY
