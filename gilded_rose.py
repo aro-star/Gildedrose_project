@@ -14,6 +14,24 @@ class GildedRose(object):
             item.update_item()
 
 
+class ItemCollection:
+    @staticmethod
+    def create(name, sell_in, quality):
+        if name == "Aged Brie":
+            return AgedBrie(name, sell_in, quality)
+
+        elif name == "BackStage Passes to a TAFKAL80ETC concert":
+            return BackstagePasses(name, sell_in, quality)
+
+        elif name == "Conjured Mana Cake":
+            return ConjuredItem(name, sell_in, quality)
+
+        elif name == "Sulfuras, Hand of Ragnaros":
+            return LegendaryItem(name, sell_in, quality)
+        else:
+            return RegularItem(name, sell_in, quality)
+
+
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
@@ -24,7 +42,7 @@ class Item:
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
 
-class NormalItem(Item):
+class RegularItem(Item):
     def __init__(self, name, sell_in, quality):
         Item.__init__(self, name, sell_in, quality)
 
@@ -42,9 +60,9 @@ class NormalItem(Item):
         self.sell_in -= 1
 
 
-class AgedItem(NormalItem):
+class AgedBrie(RegularItem):
     def __init__(self, name, sell_in, quality):
-        NormalItem.__init__(self, name, sell_in, quality)
+        RegularItem.__init__(self, name, sell_in, quality)
 
     def _update_quality(self):
         if self.quality < 0:
@@ -56,9 +74,9 @@ class AgedItem(NormalItem):
             return min(self.quality + 2, MAX_QUALITY)
 
 
-class LegendaryItem(NormalItem):
+class LegendaryItem(RegularItem):
     def __init__(self, name, sell_in, quality):
-        NormalItem.__init__(self, name, sell_in, quality)
+        RegularItem.__init__(self, name, sell_in, quality)
 
     def _update_quality(self) -> int:
         if self.quality > LEGENDARY_MAX_QUALITY:
@@ -70,9 +88,9 @@ class LegendaryItem(NormalItem):
         pass
 
 
-class TicketItem(NormalItem):
+class BackstagePasses(RegularItem):
     def __init__(self, name, sell_in, quality):
-        NormalItem.__init__(self, name, sell_in, quality)
+        RegularItem.__init__(self, name, sell_in, quality)
 
     def _update_quality(self):
         if self.sell_in > 10:
@@ -85,9 +103,9 @@ class TicketItem(NormalItem):
             return MIN_QUALITY
 
 
-class ConjuredItem(NormalItem):
+class ConjuredItem(RegularItem):
     def __init(self, name, sell_in, quality):
-        NormalItem.__init__(self, name, sell_in, quality)
+        RegularItem.__init__(self, name, sell_in, quality)
 
     def _update_quality(self):
         if self.quality < 0:
