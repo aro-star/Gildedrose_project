@@ -148,7 +148,7 @@ class BackstagePasses(RegularItem):
             return min(self.quality + 1, MAX_QUALITY)
         elif self.sell_in > 5:
             return min(self.quality + 2, MAX_QUALITY)
-        elif self.sell_in > 0:
+        elif self.sell_in >= 0:
             return min(self.quality + 3, MAX_QUALITY)
         else:
             return MIN_QUALITY
