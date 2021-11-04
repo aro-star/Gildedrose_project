@@ -174,6 +174,12 @@ class GildedRoseUpdatedTest(unittest.TestCase):
         item.update_quality()
         self.assertEqual(2, items[0].quality)
 
+    def test_conjured_after_sell_date_negative_quality(self):
+        items = [ConjuredItem("Conjured Mana Cake", -2, -1)]
+        item = GildedRose(items)
+        item.update_quality()
+        self.assertEqual(0, items[0].quality)
+
     # Other
     def test_other_products(self):
         dexterity_item = [RegularItem("+5 Dexterity Vest", 10, 20)]
